@@ -7,7 +7,12 @@ import com.shsy.shsychatclint.R;
 import com.shsy.shsychatclint.base.BaseActivity;
 import com.shsy.shsychatclint.bean.LoginBean;
 import com.shsy.shsychatclint.databinding.ActivityLoginBinding;
+import com.shsy.shsychatclint.utils.ActivityUtil;
 
+/**
+ * Created by Shsy on 2016/12/22.
+ * 这是登录页面
+ */
 public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
 
     @Override
@@ -41,7 +46,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
         }
 
         public void regist() {
-            Snackbar.make(mBinding.getRoot(), "注册", Snackbar.LENGTH_SHORT).show();
+            ActivityUtil.startActivity(LoginActivity.this, RegistActivity.class);
         }
     }
 }

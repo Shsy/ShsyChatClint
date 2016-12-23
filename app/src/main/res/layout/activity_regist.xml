@@ -68,6 +68,7 @@
             android:layout_marginRight="20dp"
             android:hint="@string/hint_regist_verifycode"
             android:inputType="number"
+            android:maxLength="4"
             android:text="@={bean.verifycode}" />
 
         <EditText

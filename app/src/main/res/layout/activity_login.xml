@@ -36,9 +36,10 @@
             android:layout_marginTop="70dp">
 
             <EditText
+                android:inputType="phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_username"
+                android:hint="@string/hint_login_username"
                 android:text="@={bean.username}" />
         </android.support.design.widget.TextInputLayout>
 
@@ -49,6 +50,7 @@
             android:layout_marginRight="20dp">
 
             <EditText
+                android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_password"

@@ -1,5 +1,6 @@
 package com.shsy.shsychatclint.base;
 
+import android.app.ProgressDialog;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatActivity {
 
     protected T mBinding;
+
+    private ProgressDialog mLoadingDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,6 +34,20 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
         int layoutId = bindLayoutId();
         if (layoutId == 0) throw new RuntimeException("LayoutId is 0...");
         mBinding = DataBindingUtil.setContentView(this, layoutId);
+    }
+
+    /**
+     * 显示正在加载的dialog
+     */
+    protected void showLoading() {
+        mLoadingDialog = ProgressDialog.show(this, null, "正在加载...");
+    }
+
+    /**
+     * 隐藏正在加载的dialog
+     */
+    protected void dismissLoading() {
+        if (mLoadingDialog != null && mLoadingDialog.isShowing()) mLoadingDialog.dismiss();
     }
 
     /**

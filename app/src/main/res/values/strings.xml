@@ -1,10 +1,18 @@
 <resources>
     <string name="app_name">ShsyChatClint</string>
 
-    <string name="hint_username">Username</string>
+    <!--登录界面-->
+    <string name="hint_login_username">Phone</string>
     <string name="hint_password">Password</string>
     <string name="login">LOGIN</string>
     <string name="regist">立即注册</string>
+
+    <!--注册界面-->
+    <string name="hint_regist_username">输入手机号</string>
+    <string name="bt_getverifycode">获取验证码</string>
+    <string name="hint_regist_password">输入密码</string>
+    <string name="bt_regist">立即注册</string>
+    <string name="hint_regist_verifycode">输入验证码</string>
 
 
 </resources>

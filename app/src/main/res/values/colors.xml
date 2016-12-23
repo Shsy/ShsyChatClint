@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="editHint">#ff80cbc4</color>
+    <color name="bgTitleToolbar">@android:color/holo_blue_bright</color>
 </resources>

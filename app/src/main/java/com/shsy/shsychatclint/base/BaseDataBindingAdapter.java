@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 
 import com.shsy.shsychatclint.BindingViewHolder;
-import com.shsy.shsychatclint.listener.OnItemClickListener;
+import com.shsy.shsychatclint.abs.listener.OnItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -4,7 +4,7 @@ import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.shsy.shsychatclint.listener.OnItemClickListener;
+import com.shsy.shsychatclint.abs.listener.OnItemClickListener;
 
 
 /**

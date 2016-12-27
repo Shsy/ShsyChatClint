@@ -1,9 +1,11 @@
 package com.shsy.shsychatclint.activity;
 
+import com.shsy.shsychatclint.AppConfig;
 import com.shsy.shsychatclint.R;
 import com.shsy.shsychatclint.base.BaseActivity;
 import com.shsy.shsychatclint.bean.MainBean;
 import com.shsy.shsychatclint.databinding.ActivityMainBinding;
+import com.shsy.shsychatclint.utils.SPUtil;
 
 /**
  * Created by 申尚宇 on 2016/12/27.
@@ -30,10 +32,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Override
     protected void doBusiness() {
-
+        SPUtil.put(mContext, AppConfig.SharedPreferences.IS_LOGIN, "1");
     }
 
-    private class Presenter {
+    public class Presenter {
 
     }
 }

@@ -13,4 +13,9 @@ public class ActivityUtil {
     public static void startActivity(Activity act, Class cls) {
         act.startActivity(new Intent(act, cls));
     }
+
+    public static void startActivityAndFinish(Activity act, Class cls) {
+        act.startActivity(new Intent(act, cls));
+        act.finish();
+    }
 }

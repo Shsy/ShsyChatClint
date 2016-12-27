@@ -56,7 +56,7 @@ public class RegistActivity extends BaseActivity<ActivityRegistBinding> {
 
     }
 
-    private class Presenter {
+    public class Presenter {
 
         private String verifycode = "0";
 

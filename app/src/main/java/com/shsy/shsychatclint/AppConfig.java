@@ -23,4 +23,15 @@ public final class AppConfig {
     public static final class NetStatus {
         public static final int OK = 0;
     }
+
+    /**
+     * SharedPreferences相关参数
+     */
+    public static final class SharedPreferences {
+        public static final String SP_NAME = "share_data";
+        public static final String IS_FIRST_RUN = "isFirstRun";
+        public static final String IS_LOGIN = "isLogin";
+        public static final String USER_ID = "userId";
+        public static final String TOKEN = "token";
+    }
 }

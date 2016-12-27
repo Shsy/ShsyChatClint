@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.shsy.shsychatclint.utils.RemindUtil;
+
 /**
  * Created by 申尚宇 on 2016/10/19.
  * activity的基类
@@ -54,6 +56,11 @@ public abstract class BaseActivity<T extends ViewDataBinding> extends AppCompatA
      */
     protected void dismissLoading() {
         if (mLoadingDialog != null && mLoadingDialog.isShowing()) mLoadingDialog.dismiss();
+    }
+
+    protected void requestError(){
+        dismissLoading();
+        RemindUtil.showToastShort(mContext,"网络链接错误啊");
     }
 
     /**

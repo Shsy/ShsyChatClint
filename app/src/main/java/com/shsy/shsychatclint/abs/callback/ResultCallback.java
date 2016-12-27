@@ -13,6 +13,6 @@ import okhttp3.Response;
 public abstract class ResultCallback extends Callback<ResultBean> {
     @Override
     public ResultBean parseNetworkResponse(Response response, int id) throws Exception {
-        return JSONObject.parseObject(response.body().string(),ResultBean.class);
+        return JSONObject.parseObject(response.body().string(), ResultBean.class);
     }
 }

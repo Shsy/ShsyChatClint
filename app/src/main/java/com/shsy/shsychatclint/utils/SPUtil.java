@@ -20,7 +20,7 @@ public class SPUtil {
     /**
      * 保存在手机里面的文件名
      */
-    public static final String FILE_NAME = AppConfig.SharedPreferences.SP_NAME;
+    private static final String FILE_NAME = AppConfig.SharedPreferences.SP_NAME;
 
     private SPUtil() {
         throw new RuntimeException("不能被实例化....");

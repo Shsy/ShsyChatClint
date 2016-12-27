@@ -8,14 +8,15 @@ import com.shsy.shsychatclint.AppConfig;
 import com.shsy.shsychatclint.R;
 import com.shsy.shsychatclint.abs.callback.ResultCallback;
 import com.shsy.shsychatclint.base.BaseActivity;
+import com.shsy.shsychatclint.bean.RequestParamsBean;
 import com.shsy.shsychatclint.bean.ResultBean;
 import com.shsy.shsychatclint.bean.LoginBean;
 import com.shsy.shsychatclint.databinding.ActivityLoginBinding;
 import com.shsy.shsychatclint.utils.ActivityUtil;
 import com.shsy.shsychatclint.utils.EncryptionUtil;
+import com.shsy.shsychatclint.utils.HttpUtil;
 import com.shsy.shsychatclint.utils.RemindUtil;
 import com.shsy.shsychatclint.utils.SPUtil;
-import com.zhy.http.okhttp.OkHttpUtils;
 
 import okhttp3.Call;
 
@@ -56,30 +57,31 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
             }
 
             showLoading();
-            OkHttpUtils.get()
-                    .url(AppConfig.NetUrl.LOGIN)
-                    .addParams("username", username)
-                    .addParams("password", EncryptionUtil.MD5(password))
-                    .build().execute(new ResultCallback() {
-                @Override
-                public void onError(Call call, Exception e, int id) {
-                    dismissLoading();
-                    RemindUtil.showToastShort(mContext, "网络连接错误啊");
-                }
+            HttpUtil.get(AppConfig.NetUrl.LOGIN,
+                    new RequestParamsBean.Builder()
+                            .put("username", username)
+                            .put("password", EncryptionUtil.MD5(password))
+                            .build(),
+                    new ResultCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            dismissLoading();
+                            RemindUtil.showToastShort(mContext, "网络连接错误啊");
+                        }
 
-                @Override
-                public void onResponse(ResultBean response, int id) {
-                    dismissLoading();
-                    if (response.getStatus() == AppConfig.NetStatus.OK) {
-                        LoginBean loginbean = JSONObject.parseObject(response.getResult(), LoginBean.class);
-                        SPUtil.put(mContext, AppConfig.SharedPreferences.USER_ID, loginbean.getId());
-                        SPUtil.put(mContext, AppConfig.SharedPreferences.TOKEN, loginbean.getToken());
-                        ActivityUtil.startActivityAndFinish(mActivity, MainActivity.class);
-                    } else {
-                        RemindUtil.showToastShort(mContext, response.getMsg());
-                    }
-                }
-            });
+                        @Override
+                        public void onResponse(ResultBean response, int id) {
+                            dismissLoading();
+                            if (response.getStatus() == AppConfig.NetStatus.OK) {
+                                LoginBean loginbean = JSONObject.parseObject(response.getResult(), LoginBean.class);
+                                SPUtil.put(mContext, AppConfig.SharedPreferences.USER_ID, loginbean.getId());
+                                SPUtil.put(mContext, AppConfig.SharedPreferences.TOKEN, loginbean.getToken());
+                                ActivityUtil.startActivityAndFinish(mActivity, MainActivity.class);
+                            } else {
+                                RemindUtil.showToastShort(mContext, response.getMsg());
+                            }
+                        }
+                    });
         }
 
         public void regist() {

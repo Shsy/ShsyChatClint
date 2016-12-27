@@ -10,10 +10,12 @@ import com.shsy.shsychatclint.AppConfig;
 import com.shsy.shsychatclint.R;
 import com.shsy.shsychatclint.abs.callback.ResultCallback;
 import com.shsy.shsychatclint.base.BaseActivity;
+import com.shsy.shsychatclint.bean.RequestParamsBean;
 import com.shsy.shsychatclint.bean.ResultBean;
 import com.shsy.shsychatclint.bean.RegistBean;
 import com.shsy.shsychatclint.databinding.ActivityRegistBinding;
 import com.shsy.shsychatclint.utils.EncryptionUtil;
+import com.shsy.shsychatclint.utils.HttpUtil;
 import com.shsy.shsychatclint.utils.RegexUtil;
 import com.shsy.shsychatclint.utils.RemindUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -77,37 +79,35 @@ public class RegistActivity extends BaseActivity<ActivityRegistBinding> {
                 RemindUtil.showToastShort(mContext, "密码不要空空的哇..");
                 return;
             }
-            password = EncryptionUtil.MD5(password);
-            if (password == null) {
-                RemindUtil.showToastShort(mContext, "加密出错请联系我");
-            } else {
                 realRegist(username, password);
-            }
         }
 
         private void realRegist(String username, String password) {
             showLoading();
-            OkHttpUtils.get().url(AppConfig.NetUrl.REGIST)
-                    .addParams("username", username)
-                    .addParams("password", password)
-                    .build().execute(new ResultCallback() {
-                @Override
-                public void onError(Call call, Exception e, int id) {
-                    dismissLoading();
-                    RemindUtil.showToastShort(mContext, "网络连接错误啊");
-                }
 
-                @Override
-                public void onResponse(ResultBean response, int id) {
-                    dismissLoading();
-                    if (response.getStatus() == AppConfig.NetStatus.OK) {
-                        RemindUtil.showToastShort(mContext, response.getMsg());
-                        mActivity.finish();
-                    } else {
-                        RemindUtil.showToastShort(mContext, response.getMsg());
-                    }
-                }
-            });
+            HttpUtil.get(AppConfig.NetUrl.REGIST,
+                    new RequestParamsBean.Builder()
+                            .put("username", username)
+                            .put("password", EncryptionUtil.MD5(password))
+                            .build(),
+                    new ResultCallback() {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            dismissLoading();
+                            RemindUtil.showToastShort(mContext, "网络连接错误啊");
+                        }
+
+                        @Override
+                        public void onResponse(ResultBean response, int id) {
+                            dismissLoading();
+                            if (response.getStatus() == AppConfig.NetStatus.OK) {
+                                RemindUtil.showToastShort(mContext, response.getMsg());
+                                mActivity.finish();
+                            } else {
+                                RemindUtil.showToastShort(mContext, response.getMsg());
+                            }
+                        }
+                    });
         }
 
         public void getVerifycode(String phone) {

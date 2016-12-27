@@ -14,8 +14,10 @@ import com.zhy.http.okhttp.callback.Callback;
 public class RequestImpl implements Request {
     public void get(String url, RequestParamsBean requestParamsBean, Callback callback) {
         GetBuilder getBuilder = OkHttpUtils.get().url(url);
-        for (Object key : requestParamsBean.keySet()) {
-            getBuilder.addParams((String) key, (String) requestParamsBean.get(key));
+        if (requestParamsBean != null) {
+            for (Object key : requestParamsBean.keySet()) {
+                getBuilder.addParams((String) key, (String) requestParamsBean.get(key));
+            }
         }
         getBuilder.build().execute(callback);
     }

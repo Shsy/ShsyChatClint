@@ -11,6 +11,7 @@ import com.shsy.shsychatclint.base.ResultBean;
 import com.shsy.shsychatclint.bean.LoginBean;
 import com.shsy.shsychatclint.databinding.ActivityLoginBinding;
 import com.shsy.shsychatclint.utils.ActivityUtil;
+import com.shsy.shsychatclint.utils.EncryptionUtil;
 import com.shsy.shsychatclint.utils.RemindUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 
@@ -46,7 +47,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
     public class Presenter {
         public void login(String username, String password) {
             if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
-                Snackbar.make(mBinding.getRoot(), "用户名或密码不能为空~", Snackbar.LENGTH_SHORT).show();
+                RemindUtil.showToastShort(mContext, "用户名或密码不能为空~");
                 return;
             }
 
@@ -54,28 +55,28 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
             OkHttpUtils.get()
                     .url(NetConfig.Url.LOGIN)
                     .addParams("username", username)
-                    .addParams("password", password)
+                    .addParams("password", EncryptionUtil.MD5(password))
                     .build().execute(new ResultCallback() {
                 @Override
                 public void onError(Call call, Exception e, int id) {
                     dismissLoading();
-                    RemindUtil.showToastShort(getApplicationContext(), "网络连接错误啊");
+                    RemindUtil.showToastShort(mContext, "网络连接错误啊");
                 }
 
                 @Override
                 public void onResponse(ResultBean response, int id) {
                     dismissLoading();
                     if (response.getStatus() == NetConfig.Status.OK) {
-                        RemindUtil.showToastShort(getApplicationContext(), "登录成功");
+                        RemindUtil.showToastShort(mContext, "登录成功");
                     } else {
-                        RemindUtil.showToastShort(getApplicationContext(), response.getMsg());
+                        RemindUtil.showToastShort(mContext, response.getMsg());
                     }
                 }
             });
         }
 
         public void regist() {
-            ActivityUtil.startActivity(LoginActivity.this, RegistActivity.class);
+            ActivityUtil.startActivity(mActivity, RegistActivity.class);
         }
     }
 }

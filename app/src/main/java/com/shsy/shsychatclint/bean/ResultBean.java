@@ -1,4 +1,4 @@
-package com.shsy.shsychatclint.base;
+package com.shsy.shsychatclint.bean;
 
 /**
  * Created by Shsy on 2016/12/25.

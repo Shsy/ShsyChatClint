@@ -5,11 +5,11 @@ package com.shsy.shsychatclint;
  * 一些相关的配置信息
  */
 
-public final class NetConfig {
+public final class AppConfig {
     /**
      * 关于网络请求的URL
      */
-    public static final class Url {
+    public static final class NetUrl {
         private static final String URL = "http://xn--rss51edx5awol.xn--5gq533gbta.xn--6qq986b3xl/api/";
 
         public static final String LOGIN = URL + "user/login";
@@ -20,7 +20,7 @@ public final class NetConfig {
     /**
      * 关于网络请求状态码
      */
-    public static final class Status {
+    public static final class NetStatus {
         public static final int OK = 0;
     }
 }

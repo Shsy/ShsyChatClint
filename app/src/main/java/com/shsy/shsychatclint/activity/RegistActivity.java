@@ -2,16 +2,15 @@ package com.shsy.shsychatclint.activity;
 
 
 import android.content.DialogInterface;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
 
-import com.shsy.shsychatclint.NetConfig;
+import com.shsy.shsychatclint.AppConfig;
 import com.shsy.shsychatclint.R;
 import com.shsy.shsychatclint.abs.callback.ResultCallback;
 import com.shsy.shsychatclint.base.BaseActivity;
-import com.shsy.shsychatclint.base.ResultBean;
+import com.shsy.shsychatclint.bean.ResultBean;
 import com.shsy.shsychatclint.bean.RegistBean;
 import com.shsy.shsychatclint.databinding.ActivityRegistBinding;
 import com.shsy.shsychatclint.utils.EncryptionUtil;
@@ -57,7 +56,7 @@ public class RegistActivity extends BaseActivity<ActivityRegistBinding> {
 
     }
 
-    public class Presenter {
+    private class Presenter {
 
         private String verifycode = "0";
 
@@ -88,7 +87,7 @@ public class RegistActivity extends BaseActivity<ActivityRegistBinding> {
 
         private void realRegist(String username, String password) {
             showLoading();
-            OkHttpUtils.get().url(NetConfig.Url.REGIST)
+            OkHttpUtils.get().url(AppConfig.NetUrl.REGIST)
                     .addParams("username", username)
                     .addParams("password", password)
                     .build().execute(new ResultCallback() {
@@ -101,7 +100,7 @@ public class RegistActivity extends BaseActivity<ActivityRegistBinding> {
                 @Override
                 public void onResponse(ResultBean response, int id) {
                     dismissLoading();
-                    if (response.getStatus() == NetConfig.Status.OK) {
+                    if (response.getStatus() == AppConfig.NetStatus.OK) {
                         RemindUtil.showToastShort(mContext, response.getMsg());
                         mActivity.finish();
                     } else {

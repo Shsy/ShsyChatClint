@@ -9,6 +9,10 @@ import java.util.TreeMap;
 
 public class RequestParamsBean<K, V> extends TreeMap<K, V> {
 
+    public void putPublicParams() {
+        this.put((K) "device", (V) "mobile");
+    }
+
 
     public static class Builder {
         private RequestParamsBean<String, String> requestParamsBean = null;

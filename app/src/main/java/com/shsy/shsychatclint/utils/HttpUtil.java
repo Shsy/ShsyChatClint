@@ -17,10 +17,13 @@ public class HttpUtil {
     }
 
     public static void get(String url, RequestParamsBean requestParamsBean, Callback callback) {
+        // 添加公共参数
+        requestParamsBean.putPublicParams();
         getRequest().get(url, requestParamsBean, callback);
     }
 
     public static void post(String url, RequestParamsBean<String, String> requestParamsBean, Callback callback) {
+        requestParamsBean.putPublicParams();
         getRequest().post(url, requestParamsBean, callback);
     }
 }
